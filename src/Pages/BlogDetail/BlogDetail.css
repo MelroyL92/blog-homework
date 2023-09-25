@@ -1,0 +1,9 @@
+.blogDetail-parent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    border: 10px outset grey;
+
+
+}

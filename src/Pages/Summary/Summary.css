@@ -1,0 +1,20 @@
+
+.parent-summary-class{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2px;
+
+}
+
+
+.child-items-summary{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 15vw;
+    margin: 10px 10px;
+    border: 5px outset grey;
+
+}
+

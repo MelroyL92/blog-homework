@@ -1,20 +1,24 @@
 import data from '/src/constants/data.json'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import timeconverter from "../../Helpers/Timeconverter/timeconverter.jsx";
+
 
 function BlogDetail () {
 
+
+    const { id } = useParams();
     const blogInfo = data
 
     return (
-        <>
-            <h1>{blogInfo[0].title}</h1>
-            <h3>{blogInfo[0].subtitle}</h3>
-            <p>Geschreven door {blogInfo[0].author} op {timeconverter()}</p>
-            <p>{blogInfo[0].content}</p>
-            <p>{blogInfo[0].comments} reacties - {blogInfo[0].shares} keer gedeeld</p>
+
+        <div className="blogDetail-parent" >
+            <h1>{blogInfo[id].title}</h1>
+            <h3>{blogInfo[id].subtitle}</h3>
+            <p>Geschreven door {blogInfo[id].author} op {timeconverter(id)}</p>
+            <p>{blogInfo[id].content}</p>
+            <p>{blogInfo[id].comments} reacties - {blogInfo[id].shares} keer gedeeld</p>
             <Link to="/">Homepage</Link>
-        </>
+        </div>
     )
 }
 

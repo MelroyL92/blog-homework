@@ -1,0 +1,12 @@
+
+ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    width: 40vw;
+}
+
+.nav-class-links {
+    display: flex;
+    justify-content: flex-end;
+}

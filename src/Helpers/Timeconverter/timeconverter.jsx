@@ -1,11 +1,11 @@
 import data from '/src/constants/data.json'
 
-function TimeConverter () {
+function TimeConverter (id) {
 
     const list = data
 
 
-    const date = new Date(list[0].created)
+    const date = new Date(list[id].created)
 
     const longOptions = {
         year: 'numeric',

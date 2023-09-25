@@ -6,10 +6,9 @@ function Navlinks() {
 
 
     return (
-        <nav>
+        <nav className="nav-class-links">
             <ul>
                 <li><Link to="/">Homepage</Link></li>
-                <li><Link to="/BlogDetail">BlogDetail</Link></li>
                 <li><Link to="/BlogPage">BlogPage</Link> </li>
                 <li><Link to="/Summary">Summary</Link></li>
             </ul>
