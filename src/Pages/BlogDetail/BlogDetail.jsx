@@ -1,22 +1,41 @@
-import data from '/src/constants/data.json'
 import {Link, useParams} from "react-router-dom";
 import timeconverter from "../../Helpers/Timeconverter/timeconverter.jsx";
+import {useState} from "react";
+import axios from "axios";
 
 
 function BlogDetail () {
 
+    const [specificBlog, toggleSpecificBlog] = useState([]); // geef je de waarde die je verwacht terug te krijgen mee, in dit geval dus een lege array. Deze wordt gevuld met de waarde die de asynchrone functie terug geeft.
+    const [error, toggleError] = useState(false);
+
 
     const { id } = useParams();
-    const blogInfo = data
+
+    async function fetchBlogInfo() {
+        toggleError(false)
+    try {
+            const response = await axios.get(`http://localhost:3000/posts/${id}`)
+            toggleSpecificBlog(response.data)
+    } catch (e) {
+            console.error(e);
+            toggleError(true)
+    }
+    }
+
+
 
     return (
 
+
         <div className="blogDetail-parent" >
-            <h1>{blogInfo[id].title}</h1>
-            <h3>{blogInfo[id].subtitle}</h3>
-            <p>Geschreven door {blogInfo[id].author} op {timeconverter(id)}</p>
-            <p>{blogInfo[id].content}</p>
-            <p>{blogInfo[id].comments} reacties - {blogInfo[id].shares} keer gedeeld</p>
+            <button type='button' onClick={fetchBlogInfo}>specific information</button>
+            {error && <p>er is iets misgegaan......</p>}
+            <h1>{specificBlog.title}</h1>
+            <h3>{specificBlog.subtitle}</h3>
+            <p>Geschreven door {specificBlog.author} op {timeconverter(id)}</p>
+            <p>{specificBlog.content}</p>
+            <p>{specificBlog.comments} reacties - {specificBlog.shares} keer gedeeld</p>
             <Link to="/">Homepage</Link>
         </div>
     )
