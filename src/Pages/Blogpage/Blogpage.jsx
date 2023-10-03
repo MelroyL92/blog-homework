@@ -1,7 +1,6 @@
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
 
 
 
@@ -23,7 +22,6 @@ import {useParams} from "react-router-dom";
             shares  : 0,
         })
 
-        const { id } = useParams();
 
         const handleSave = async (formValues) => {
             // alvast een paar standaard waardes meegeven, lukte me niet op een andere manier
@@ -34,7 +32,6 @@ import {useParams} from "react-router-dom";
             // Update the formvalues state with the current form values
             setFormValues(formValues);
 
-            // Send the form values to your server using Axios
             try {
                 const response = await axios.post('http://localhost:3000/posts/', formValues);
                 console.log(response);

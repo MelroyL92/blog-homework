@@ -6,13 +6,8 @@ import axios from "axios";
 
 function Summary () {
 
-
     const [items, toggleItems] = useState([]); // geef je de waarde die je verwacht terug te krijgen mee, in dit geval dus een lege array. Deze wordt gevuld met de waarde die de asynchrone functie terug geeft.
     const [error, toggleError] = useState(false);
-
-
-
-
 
     async function fetchOverviewInfo() {
         toggleError(false)

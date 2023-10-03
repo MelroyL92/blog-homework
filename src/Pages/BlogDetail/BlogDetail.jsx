@@ -7,7 +7,7 @@ function BlogDetail () {
 
     const [specificBlog, toggleSpecificBlog] = useState([]); // geef je de waarde die je verwacht terug te krijgen mee, in dit geval dus een lege array. Deze wordt gevuld met de waarde die de asynchrone functie terug geeft.
     const [error, toggleError] = useState(false);
-
+    const [list, setList] = useState([]);
 
     const { id } = useParams();
 
@@ -15,6 +15,7 @@ function BlogDetail () {
         toggleError(false)
         try {
             const response = await axios.get(`http://localhost:3000/posts/${id}`)
+            setList(response.data)
             toggleSpecificBlog(response.data)
         } catch (e) {
             console.error(e);
@@ -31,6 +32,12 @@ function BlogDetail () {
         }
     }
 
+    //input voor de date
+    const longOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    };
 
     return (
 
@@ -40,7 +47,7 @@ function BlogDetail () {
             {error && <p>er is iets misgegaan......</p>}
             <h1>{specificBlog.title}</h1>
             <h3>{specificBlog.subtitle}</h3>
-            <p>Geschreven door {specificBlog.author} op nog te bepalen</p>
+            <p>Geschreven door {specificBlog.author} op {new Date(list.created).toLocaleDateString('nl-NL', longOptions)}</p>
             <p>{specificBlog.content}</p>
             <p>{specificBlog.comments} reacties - {specificBlog.shares} keer gedeeld</p>
             <Link to="/">Homepage</Link>

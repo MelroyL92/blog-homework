@@ -14,11 +14,6 @@ import "./Pages/Summary/Summary.css"
 
 function App() {
 
-
-
-
-
-
     const handleSave = (values) => {
         console.log({values});
     }
@@ -39,8 +34,6 @@ function App() {
                     </Routes>
                 </div>
             </>
-
-
         )
 }
 
