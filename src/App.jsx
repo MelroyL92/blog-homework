@@ -11,7 +11,11 @@ import "./Components/Navlinks/Navlinks.css"
 import "./Pages/Summary/Summary.css"
 
 
+
 function App() {
+
+
+
 
 
 
@@ -34,7 +38,6 @@ function App() {
                         <Route path="/Summary" element={<Summary/>}/>
                     </Routes>
                 </div>
-
             </>
 
 

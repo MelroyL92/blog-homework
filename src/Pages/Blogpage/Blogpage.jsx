@@ -1,4 +1,7 @@
 import {useForm} from "react-hook-form";
+import {useState} from "react";
+import axios from "axios";
+import {useParams} from "react-router-dom";
 
 
 
@@ -8,10 +11,39 @@ import {useForm} from "react-hook-form";
 
         })
 
+        const [error, toggleError] = useState(false);
+        const [formvalues, setFormValues] = useState({
+            title : " ",
+            subtitle : " ",
+            content : "",
+            created :  "",
+            author  : "",
+            readTime : 1,
+            comments :0,
+            shares  : 0,
+        })
 
-        const handleSave = (formValues) => {
-            onSave(formValues);
-        }
+        const { id } = useParams();
+
+        const handleSave = async (formValues) => {
+            // alvast een paar standaard waardes meegeven, lukte me niet op een andere manier
+            formValues.readTime = 1;
+            formValues.comments = 0;
+            formValues.shares = 0;
+            formValues.created = ""
+            // Update the formvalues state with the current form values
+            setFormValues(formValues);
+
+            // Send the form values to your server using Axios
+            try {
+                const response = await axios.post('http://localhost:3000/posts/', formValues);
+                console.log(response);
+                onSave(formValues);
+            } catch (e) {
+                console.error(e);
+                toggleError(true);
+            }
+        };
 
 
         return (
@@ -26,7 +58,7 @@ import {useForm} from "react-hook-form";
                     {errors.title && <p>{errors.title.message}</p>}
                 </label>
                 <label htmlFor="subtitle">Subtitel
-                    <input type="text" id="subtitle" {...register("subtitle", {
+                    <input type="text" id="subtitle"  {...register("subtitle", {
                         required: {
                             value: true,
                             message: "subtitel is verplicht"
@@ -34,8 +66,8 @@ import {useForm} from "react-hook-form";
                     })} />
                     {errors.subtitle && <p>{errors.subtitle.message}</p>}
                 </label>
-                <label htmlFor="blogpost">Blog
-                    <textarea id="blogpost" cols="30" rows="10" {...register("content", {
+                <label htmlFor="content">Blog
+                    <textarea id="content" cols="30" rows="10"  {...register("content", {
                         required: {
                             value: true,
                             message: "dit veld is verplicht"
@@ -51,14 +83,14 @@ import {useForm} from "react-hook-form";
                     })}/>
                     {errors.content && <p>{errors.content.message}</p>}
                 </label>
-                <label htmlFor="auteur">Auteur
-                    <input type="text" id="auteur" placeholder="first and last name" {...register("auteur", {
+                <label htmlFor="author">Auteur
+                    <input type="text" id="author" placeholder="first and last name" {...register("author", {
                     required: {
                     value: true,
                     message: "write your first and last name"
                     },
                     })}/>
-                    {errors.auteur && <p>{errors.auteur.message}</p>}
+                    {errors.author && <p>{errors.author.message}</p>}
                 </label>
 
 

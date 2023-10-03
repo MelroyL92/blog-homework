@@ -1,4 +1,3 @@
-
 import {Link} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
@@ -10,6 +9,10 @@ function Summary () {
 
     const [items, toggleItems] = useState([]); // geef je de waarde die je verwacht terug te krijgen mee, in dit geval dus een lege array. Deze wordt gevuld met de waarde die de asynchrone functie terug geeft.
     const [error, toggleError] = useState(false);
+
+
+
+
 
     async function fetchOverviewInfo() {
         toggleError(false)
@@ -23,6 +26,8 @@ function Summary () {
         }
     }
 
+
+
     return (
         <>
         <div className="parent-summary-class">
@@ -33,6 +38,7 @@ function Summary () {
                         <p>{item.comments} reacties - {item.shares} keer gedeeld</p>
                     </li>
                 </ul>
+
             ))}
             <button type="button" onClick={fetchOverviewInfo}>overview</button>
             {error && <p>er is iets misgegaan</p>}

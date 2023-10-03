@@ -1,5 +1,4 @@
 import {Link, useParams} from "react-router-dom";
-import timeconverter from "../../Helpers/Timeconverter/timeconverter.jsx";
 import {useState} from "react";
 import axios from "axios";
 
@@ -14,15 +13,23 @@ function BlogDetail () {
 
     async function fetchBlogInfo() {
         toggleError(false)
-    try {
+        try {
             const response = await axios.get(`http://localhost:3000/posts/${id}`)
             toggleSpecificBlog(response.data)
-    } catch (e) {
+        } catch (e) {
             console.error(e);
             toggleError(true)
-    }
+        }
     }
 
+    async function deletePost() {
+        try {
+            const deletedPost = await axios.delete(`http://localhost:3000/posts/${id}`)
+            console.log(deletedPost)
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
 
     return (
@@ -33,10 +40,12 @@ function BlogDetail () {
             {error && <p>er is iets misgegaan......</p>}
             <h1>{specificBlog.title}</h1>
             <h3>{specificBlog.subtitle}</h3>
-            <p>Geschreven door {specificBlog.author} op {timeconverter(id)}</p>
+            <p>Geschreven door {specificBlog.author} op nog te bepalen</p>
             <p>{specificBlog.content}</p>
             <p>{specificBlog.comments} reacties - {specificBlog.shares} keer gedeeld</p>
             <Link to="/">Homepage</Link>
+            <button type="button" onClick={deletePost}>delete</button>
+
         </div>
     )
 }
