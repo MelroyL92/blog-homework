@@ -4,11 +4,8 @@ import axios from "axios";
 
 
 
-    const BlogPage = ({onSave, formData = {}}) => {
-        const {register, handleSubmit, formState: {errors}} = useForm({
-            defaultValues: formData,
-
-        })
+    const BlogPage = ({onSave = {}}) => {
+        const {register, handleSubmit, formState: {errors}} = useForm()
 
         const [error, toggleError] = useState(false);
         const [formvalues, setFormValues] = useState({
@@ -22,9 +19,8 @@ import axios from "axios";
             shares  : 0,
         })
 
-
         const handleSave = async (formValues) => {
-            // alvast een paar standaard waardes meegeven, lukte me niet op een andere manier
+            // alvast een paar standaard waardes meegeven, lukte me niet op een andere manier, moet eigenlijk nog de calculatefunctie gebruiken voor de readtime
             formValues.readTime = 1;
             formValues.comments = 0;
             formValues.shares = 0;
